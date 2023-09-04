@@ -37,7 +37,6 @@ class ILTextButton extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    print("${ILSizeConfig.blockSizeH! * 5}");
     return GestureDetector(
       onTap: onPressed,
       child: Container(
