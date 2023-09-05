@@ -3,7 +3,7 @@ import 'package:lombard_ui/common/il_constants.dart';
 
 class ILExpansionTile extends StatefulWidget {
   final String title;
-  final double? height;
+  // final double? height;
   final double? width;
   final Color? backgroundColor;
   late bool? isExpanded;
@@ -14,10 +14,10 @@ class ILExpansionTile extends StatefulWidget {
   ILExpansionTile({
     required this.title,
     super.key,
-    this.height,
+    // this.height,
     this.width,
     this.backgroundColor,
-    this.isCurved,
+    this.isCurved = true,
     this.isExpanded,
     this.child,
     this.titleColor,
@@ -29,7 +29,7 @@ class ILExpansionTile extends StatefulWidget {
 
 class _ILExpansionTileState extends State<ILExpansionTile> {
   late double _width;
-  late bool _isExpanded;
+  bool _isExpanded = false;
   @override
   void initState() {
     super.initState();
@@ -50,7 +50,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
           borderRadius: BorderRadius.circular(widget.isCurved == true ? 10 : 2),
           color: widget.backgroundColor ?? Colors.white,
         ),
-        height: widget.height,
+        // height: widget.height,
         width: _width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +86,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
                           widget.title,
                           style: ILTextStyles.kTitleRobotoMedium.copyWith(
                             fontSize: ILSizeConfig.textMultiplier * 4,
-                            color: widget.titleColor ?? Colors.black,
+                            color: widget.titleColor ?? ILColors.kBlackColor,
                           ),
                         ),
                       ),

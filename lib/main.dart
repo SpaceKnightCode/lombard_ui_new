@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 import 'package:lombard_ui/il_text_field.dart';
+import 'package:lombard_ui_new/il_checkbox.dart';
 import 'package:lombard_ui_new/il_expansion_tile.dart';
 import 'package:lombard_ui_new/il_text_button.dart';
 
@@ -19,20 +20,21 @@ class LombardUITestPage extends StatelessWidget {
         body: Container(
           margin: EdgeInsets.only(top: 100, left: 20, right: 20),
 
-          child: ILExpansionTile(
-            title: "Ownswe",
-            child: Row(
-              children: [
-                Container(
-                  margin:
-                      EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
-                  height: 100,
-                  width: 100,
-                  color: Colors.red,
-                )
-              ],
-            ),
+          child: ILCheckBox(
+            text: "hello",
           ),
+
+          // ILExpansionTile(
+          //   title: "Ownswe",
+          //   child: Row(
+          //     children: [
+          //       Container(
+          //         color: Colors.red,
+          //         child: const Text('text'),
+          //       )
+          //     ],
+          //   ),
+          // ),
 
           //ILButton
 
