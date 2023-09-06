@@ -19,7 +19,7 @@ class ILCheckBox extends StatefulWidget {
 }
 
 class _ILCheckBoxState extends State<ILCheckBox> {
-  bool isChecked = false;
+  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +31,10 @@ class _ILCheckBoxState extends State<ILCheckBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
-          value: isChecked,
+          value: _isChecked,
           onChanged: (value) {
             setState(() {
-              isChecked = value!;
+              _isChecked = value!;
             });
           },
         ),
