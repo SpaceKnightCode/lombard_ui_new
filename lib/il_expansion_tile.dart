@@ -10,7 +10,6 @@ class ILExpansionTile extends StatefulWidget {
   final Widget? child;
   final bool? isCurved;
   final Color? titleColor;
-
   ILExpansionTile({
     required this.title,
     super.key,
@@ -39,7 +38,6 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
 
   @override
   Widget build(BuildContext context) {
-    _width = widget.width ?? ILSizeConfig.screenWidth;
     return PhysicalModel(
       borderRadius: BorderRadius.circular(widget.isCurved == true ? 10 : 2),
       shadowColor: Colors.grey,

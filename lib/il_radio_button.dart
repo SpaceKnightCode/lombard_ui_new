@@ -3,7 +3,7 @@ import 'package:lombard_ui/common/il_constants.dart';
 import 'package:lombard_ui/common/il_colors.dart';
 
 class ILRadioButton extends StatefulWidget {
-  const ILRadioButton({
+  ILRadioButton({
     Key? key,
     required this.title,
     required this.value,
@@ -22,23 +22,27 @@ class ILRadioButton extends StatefulWidget {
     this.subtitle,
     this.isRecommended = false,
     this.subtitleColor,
+    this.activeButtonColor,
+    this.buttonColor,
   }) : super(key: key);
 
   final String title;
   final String? subtitle;
-  final bool? isRecommended;
+  bool? isRecommended;
   final String value;
   final String? groupValue;
+  Color? buttonColor;
+  Color? activeButtonColor;
   final ValueChanged<String?> onChanged;
   final Color? activeBackgroundColor;
   final double? height;
   final double? width;
   final bool? hasBorder;
-  final Color? borderColor;
+  Color? borderColor;
   final Color? activeBorderColor;
-  final Color? titleColor;
-  final Color? subtitleColor;
-  final Color? backgroundColor;
+  Color? titleColor;
+  Color? subtitleColor;
+  Color? backgroundColor;
   final bool? isDisabled;
   final bool? isCurved;
 
@@ -50,17 +54,26 @@ class _ILRadioButtonState extends State<ILRadioButton> {
   @override
   Widget build(BuildContext context) {
     const Color kSecondaryOrangeColor = Color(0xfff5e7e1);
-
+    if (widget.isDisabled ?? false) {
+      widget.isRecommended = false;
+      widget.backgroundColor = ILColors.kGreyColorc3c3c3;
+      widget.borderColor = ILColors.kGreyColorc3c3c3;
+      widget.titleColor = ILColors.kGreyColor585858;
+      widget.subtitleColor = ILColors.kGreyColor585858;
+      widget.buttonColor = ILColors.kGreyColor585858;
+    }
     return Stack(
       alignment: Alignment.topCenter,
       clipBehavior: Clip.none,
       children: [
         GestureDetector(
-          onTap: () {
-            if (widget.value != widget.groupValue) {
-              widget.onChanged(widget.value);
-            }
-          },
+          onTap: widget.isDisabled ?? false
+              ? () {}
+              : () {
+                  if (widget.value != widget.groupValue) {
+                    widget.onChanged(widget.value);
+                  }
+                },
           child: Container(
             margin: EdgeInsets.only(top: ILSizeConfig.blockSizeV),
             decoration: BoxDecoration(
@@ -87,11 +100,14 @@ class _ILRadioButtonState extends State<ILRadioButton> {
               children: [
                 Container(
                   child: Radio(
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     activeColor: widget.activeBackgroundColor ??
                         ILColors.kPrimaryOrangeColor,
                     value: widget.value,
                     onChanged: (value) {
-                      widget.onChanged(value);
+                      widget.isDisabled ?? false
+                          ? null
+                          : widget.onChanged(value);
                     },
                     groupValue: widget.groupValue,
                   ),
