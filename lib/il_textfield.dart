@@ -4,8 +4,8 @@ import 'package:lombard_ui/common/il_colors.dart';
 class ILTextField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
-  final IconData? prefixIcon;
-  final IconData? suffixIcon;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final bool? isPassword;
   final ValueChanged<String>? onChanged;
   final FormFieldValidator<String>? validator;
@@ -28,14 +28,22 @@ class ILTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         labelText: "$labelText${isMandatory == true ? "*" : ""}",
-        prefixIcon: Icon(Icons.person),
-        suffixIcon: Icon(Icons.person),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         fillColor: ILColors.kGreyColor2c2c2c,
-        focusColor: Colors.red,
+        focusColor: ILColors.kGreyBorderPrimaryColor,
+        iconColor: ILColors.kGreyBorderPrimaryColor,
+        prefixIconColor: ILColors.kGreyBorderPrimaryColor,
+        suffixIconColor: ILColors.kGreyBorderPrimaryColor,
         hoverColor: ILColors.kGreyColor2c2c2c,
+        floatingLabelStyle: TextStyle(color: ILColors.kGreyBorderPrimaryColor),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: ILColors.kGreyColor2c2c2c),
+          borderSide: BorderSide(color: ILColors.kGreyBorderPrimaryColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: ILColors.kGreyBorderPrimaryColor),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

@@ -37,9 +37,8 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
           child: ILTextField(
             hintText: "",
             labelText: "Name",
-            prefixIcon: Icons.person,
+            prefixIcon: Icon(Icons.person),
             isMandatory: true,
-            suffixIcon: Icons.person,
             isPassword: true,
             onChanged: (value) {
               print(value);
