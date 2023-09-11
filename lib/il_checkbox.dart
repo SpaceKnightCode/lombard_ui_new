@@ -8,11 +8,13 @@ class ILCheckBox extends StatefulWidget {
     required this.text,
     this.activeColor,
     this.checkColor,
+    required this.onChanged,
   }) : super(key: key);
 
   final String text;
   final Color? activeColor;
   final Color? checkColor;
+  final VoidCallback onChanged;
 
   @override
   State<ILCheckBox> createState() => _ILCheckBoxState();
@@ -33,6 +35,7 @@ class _ILCheckBoxState extends State<ILCheckBox> {
           ),
           value: _isChecked,
           onChanged: (value) {
+            widget.onChanged();
             setState(() {
               _isChecked = value!;
             });
@@ -42,7 +45,7 @@ class _ILCheckBoxState extends State<ILCheckBox> {
           widget.text,
           style: ILTextStyles.kTitleRobotoRegular.copyWith(
             color: ILColors.kBlackColor,
-            fontSize: ILSizeConfig.textMultiplier! * 4,
+            fontSize: ILSizeConfig.textMultiplier * 4,
           ),
         ),
       ],

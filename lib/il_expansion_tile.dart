@@ -40,13 +40,13 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
   Widget build(BuildContext context) {
     return PhysicalModel(
       borderRadius: BorderRadius.circular(widget.isCurved == true ? 10 : 2),
-      shadowColor: Colors.grey,
+      shadowColor: ILColors.kGreyColor585858,
       elevation: 1,
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(widget.isCurved == true ? 10 : 2),
-          color: widget.backgroundColor ?? Colors.white,
+          color: widget.backgroundColor ?? ILColors.kWhiteColor,
         ),
         // height: widget.height,
         width: _width,
@@ -58,7 +58,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
             PhysicalModel(
               borderRadius:
                   BorderRadius.circular(widget.isCurved == true ? 10 : 2),
-              shadowColor: Colors.grey,
+              shadowColor: ILColors.kGreyColor585858,
               color: Colors.transparent,
               elevation: 0.6,
               child: GestureDetector(
@@ -72,7 +72,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
                       horizontal: ILSizeConfig.blockSizeH * 4,
                       vertical: ILSizeConfig.blockSizeV * 2),
                   decoration: BoxDecoration(
-                    color: widget.backgroundColor ?? Colors.white,
+                    color: widget.backgroundColor ?? ILColors.kWhiteColor,
                     borderRadius:
                         BorderRadius.circular(widget.isCurved == true ? 10 : 2),
                   ),
@@ -94,7 +94,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
                           _isExpanded
                               ? Icons.keyboard_arrow_up_sharp
                               : Icons.keyboard_arrow_down_sharp,
-                          color: Colors.black45,
+                          color: ILColors.kBlackColor.withOpacity(0.5),
                           size: ILSizeConfig.heightMultiplier * 4.5,
                         ),
                       ),

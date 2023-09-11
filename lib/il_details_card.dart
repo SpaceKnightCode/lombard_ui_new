@@ -31,11 +31,11 @@ class ILDetailsCard extends StatelessWidget {
     return PhysicalModel(
       elevation: 1,
       borderRadius: BorderRadius.circular(_borderRadius),
-      color: Colors.black,
+      color: ILColors.kBlackColor,
       child: Container(
         width: _width,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ILColors.kWhiteColor,
           borderRadius: BorderRadius.circular(_borderRadius),
         ),
         child: Column(
@@ -48,12 +48,12 @@ class ILDetailsCard extends StatelessWidget {
                 topLeft: Radius.circular(_borderRadius),
                 topRight: Radius.circular(_borderRadius),
               ),
-              color: Colors.black,
-              shadowColor: Colors.grey,
+              color: ILColors.kBlackColor,
+              shadowColor: ILColors.kGreyColor585858,
               child: Container(
                 width: _width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: ILColors.kWhiteColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(_borderRadius),
                     topRight: Radius.circular(_borderRadius),

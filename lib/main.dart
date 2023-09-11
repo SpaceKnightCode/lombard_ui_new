@@ -48,7 +48,10 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
                     infoUrl: "https://www.google.com",
                   ),
                   Spacer(),
-                  ILCheckBox(text: ""),
+                  ILCheckBox(
+                    text: "",
+                    onChanged: () {},
+                  ),
                 ],
               ),
               Row(
@@ -63,7 +66,10 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
                     infoUrl: "https://www.google.com",
                   ),
                   Spacer(),
-                  ILCheckBox(text: ""),
+                  ILCheckBox(
+                    text: "",
+                    onChanged: () {},
+                  ),
                 ],
               ),
             ],
