@@ -24,31 +24,35 @@ class LombardUITestPage extends StatefulWidget {
 
 class _LombardUITestPageState extends State<LombardUITestPage> {
   String? year;
-
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     ILSizeConfig().init(context);
 
     return MaterialApp(
+      theme: ThemeData(useMaterial3: true),
       home: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print(controller.text);
+          },
+          child: const Icon(Icons.add),
+        ),
         body: Container(
           margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
 
           child: ILTextField(
-            hintText: "",
+            controller: controller,
+            hintText: "Enter Username here",
             labelText: "Name",
-            prefixIcon: Icon(Icons.person),
             isMandatory: true,
-            isPassword: true,
+            isPassword: false,
             onChanged: (value) {
               print(value);
             },
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please enter your name";
-              }
-              return null;
-            },
+            isCurved: false,
+            isEnabled: true,
+            maxLength: 20,
           ),
           // child: ILSplitCard(
           //   width: ILSizeConfig.blockSizeH * 100,
