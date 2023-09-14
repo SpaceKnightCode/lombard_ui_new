@@ -62,7 +62,6 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
     _isOn = widget.isSwitched ?? false;
     _onText = widget.onText!;
     _offText = widget.offText!;
-    String letter = " ";
     if (widget.isEmptySwitch == true) {
       _onText = "";
       _offText = "";
