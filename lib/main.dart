@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
+import 'package:lombard_ui_new/il_switch_button.dart';
+import 'package:lombard_ui_new/il_text_image.dart';
 import 'package:lombard_ui_new/il_textfield.dart';
 import 'package:lombard_ui_new/il_checkbox.dart';
 import 'package:lombard_ui_new/il_details_card.dart';
@@ -23,7 +25,6 @@ class LombardUITestPage extends StatefulWidget {
 }
 
 class _LombardUITestPageState extends State<LombardUITestPage> {
-  String? year;
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -32,28 +33,41 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
       home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print(controller.text);
-          },
-          child: const Icon(Icons.add),
-        ),
         body: Container(
           margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
 
-          child: ILTextField(
-            controller: controller,
-            hintText: "Enter Username here",
-            labelText: "Name",
-            isMandatory: true,
-            isPassword: false,
-            onChanged: (value) {
-              print(value);
-            },
-            isCurved: false,
-            isEnabled: true,
-            maxLength: 20,
-          ),
+          child: ILSwitchButton(isEmptySwitch: false),
+
+          // child: ILTextImage(
+          //   image: Image.network(
+          //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPR9o1fOPg6j7cQ0uX4AsxAhKFv_zJ3wkkA&usqp=CAU"),
+          //   text: "hello world",
+          //   padding: 10,
+          //   isCurved: true,
+          //   spacing: 10,
+          //   textAlign: TextAlign.start,
+          //   textColor: Colors.red,
+          //   textSize: 20,
+          //   height: 200,
+          //   width: 400,
+          //   borderColor: Colors.black,
+          //   fit: BoxFit.fitWidth,
+          //   backgroundColor: Colors.grey,
+          // ),
+
+          // child: ILTextField(
+          //   controller: controller,
+          //   hintText: "Enter Username here",
+          //   labelText: "Name",
+          //   isMandatory: true,
+          //   isPassword: false,
+          //   onChanged: (value) {
+          //     print(value);
+          //   },
+          //   isCurved: false,
+          //   isEnabled: true,
+          //   maxLength: 20,
+          // ),
           // child: ILSplitCard(
           //   width: ILSizeConfig.blockSizeH * 100,
           //   header: Container(

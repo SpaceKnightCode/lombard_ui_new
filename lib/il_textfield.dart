@@ -20,6 +20,8 @@ class ILTextField extends StatelessWidget {
   final bool? isMandatory;
 
   final ValueChanged<String>? onChanged;
+  final VoidCallback? onTapOutside;
+  final VoidCallback? onTap;
 
   final double? textSize;
   final double? labelSize;
@@ -84,6 +86,8 @@ class ILTextField extends StatelessWidget {
     this.maxLength,
     this.minLength,
     this.floatingLabelSize,
+    this.onTapOutside,
+    this.onTap,
   });
 
   FocusNode focusNode = FocusNode();
@@ -160,9 +164,10 @@ class ILTextField extends StatelessWidget {
             borderSide: BorderSide(color: fillColor!),
           ),
         ),
+        onTap: onTap,
         onTapOutside: (value) {
           if (controller == null || controller!.text.isEmpty) {
-            print("Tapped outside");
+            onTapOutside;
             focusNode.unfocus();
           }
         },
