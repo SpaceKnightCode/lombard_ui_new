@@ -64,15 +64,8 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
     _offText = widget.offText!;
     String letter = " ";
     if (widget.isEmptySwitch == true) {
-      _onText = "  ";
-      _offText = "  ";
-    } else if (_onText!.length - _offText!.length == 0) {
-    } else if (_onText!.length - _offText!.length < 0) {
-      int difference = _offText!.length - _onText!.length;
-      _onText = _onText! + List.filled(difference, letter).join('');
-    } else {
-      int difference = _onText!.length - _offText!.length;
-      _offText = List.filled(difference, letter).join('') + _offText!;
+      _onText = "";
+      _offText = "";
     }
     super.initState();
   }
@@ -96,7 +89,7 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
           padding: EdgeInsets.symmetric(
               horizontal: ILSizeConfig.blockSizeH * 4,
               vertical: ILSizeConfig.blockSizeH * 3),
-          height: widget.height,
+          height: widget.height ?? ILSizeConfig.blockSizeH * 12,
           width: widget.width,
           decoration: BoxDecoration(
             color: widget.backgroundColor ?? ILColors.kWhiteColor,
@@ -108,6 +101,7 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
             children: [
               _isOn
                   ? Container(
+                      width: ILSizeConfig.blockSizeH * 7,
                       margin:
                           EdgeInsets.only(right: ILSizeConfig.blockSizeH * 5),
                       child: Text(
@@ -131,12 +125,13 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
                 width: ILSizeConfig.blockSizeH * 6,
               ),
               _isOn
-                  ? SizedBox()
+                  ? const SizedBox()
                   : Container(
+                      width: ILSizeConfig.blockSizeH * 7,
                       margin:
                           EdgeInsets.only(left: ILSizeConfig.blockSizeH * 5),
                       child: Text(
-                        _offText! + "",
+                        _offText!,
                         style: ILTextStyles.kTitleRobotoBold.copyWith(
                           fontSize: widget.textSize ??
                               ILSizeConfig.textMultiplier * 4.5,

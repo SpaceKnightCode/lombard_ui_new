@@ -36,7 +36,7 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
         body: Container(
           margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
 
-          child: ILSwitchButton(isEmptySwitch: false),
+          child: ILSwitchButton(isEmptySwitch: true),
 
           // child: ILTextImage(
           //   image: Image.network(
