@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 
+// ignore: must_be_immutable
 class ILExpansionTile extends StatefulWidget {
   final String title;
   // final double? height;
@@ -79,7 +80,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Container(
+                      SizedBox(
                         child: Text(
                           widget.title,
                           style: ILTextStyles.kTitleRobotoMedium.copyWith(
@@ -89,7 +90,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
                         ),
                       ),
                       const Spacer(),
-                      Container(
+                      SizedBox(
                         child: Icon(
                           _isExpanded
                               ? Icons.keyboard_arrow_up_sharp
@@ -106,7 +107,7 @@ class _ILExpansionTileState extends State<ILExpansionTile> {
 
             //bottom part - expanded
             if (_isExpanded)
-              Container(
+              SizedBox(
                 width: _width,
                 child: widget.child,
               ),

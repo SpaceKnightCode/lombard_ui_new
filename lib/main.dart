@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
+import 'package:lombard_ui_new/il_dropdown.dart';
 import 'package:lombard_ui_new/il_switch_button.dart';
 import 'package:lombard_ui_new/il_text_image.dart';
 import 'package:lombard_ui_new/il_textfield.dart';
@@ -36,9 +37,37 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
         body: Container(
           margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
 
-          child: ILSwitchButton(
-            onChanged: () {},
+          child: ILDropdown(
+            items: [
+              "option  1",
+              "jANechb",
+              "option q34r",
+              "ESFEaawef",
+              "option 123",
+              "option asd",
+              "EFceWesfwDEF",
+              "53Y45SSZG"
+            ],
+            label: "Customer type",
+            onChanged: (String value) {
+              print(value);
+            },
           ),
+
+          // child: ILSwitchButton(
+          //   isEmptySwitch: false,
+          //   onChanged: () {},
+          //   activeColor: ILColors.kDarkRedColor,
+          //   inactiveColor: ILColors.kGreenColor,
+          //   hasShadow: true,
+          //   isDisabled: false,
+          //   isCurved: false,
+          //   textColor: Colors.blue,
+          //   offText: "off",
+          //   textSize: 30,
+          //   onText: "elsse",
+          //   isOn: true,
+          // ),
 
           // child: ILTextImage(
           //   image: Image.network(

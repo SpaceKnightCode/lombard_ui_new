@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_colors.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 
+// ignore: must_be_immutable
 class ILTextField extends StatelessWidget {
   final double? height;
   final double? width;

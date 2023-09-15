@@ -53,7 +53,7 @@ class ILOptionsTextbox extends StatelessWidget {
           ),
         Text(text,
             style: ILTextStyles.kTitleRobotoRegular.copyWith(
-              fontSize: textSize ?? ILSizeConfig.textMultiplier! * 4.5,
+              fontSize: textSize ?? ILSizeConfig.textMultiplier * 4.5,
               color: isDisabled ?? false
                   ? ILColors.kGreyColor585858
                   : textColor ?? ILColors.kBlackColor,

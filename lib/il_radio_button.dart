@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 import 'package:lombard_ui/common/il_colors.dart';
 
+// ignore: must_be_immutable
 class ILRadioButton extends StatefulWidget {
   ILRadioButton({
     Key? key,
