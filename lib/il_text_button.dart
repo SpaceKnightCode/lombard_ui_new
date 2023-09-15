@@ -43,8 +43,8 @@ class ILTextButton extends StatelessWidget {
         width: isFullWidth! ? double.infinity : width,
         height: height,
         padding: EdgeInsets.symmetric(
-            horizontal: ILSizeConfig.blockSizeH! * 5,
-            vertical: ILSizeConfig.blockSizeV! * 2),
+            horizontal: ILSizeConfig.blockSizeH * 5,
+            vertical: ILSizeConfig.blockSizeV * 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(isCurved! ? 30 : 10),
           color: backgroundColor ?? Theme.of(context).primaryColor,

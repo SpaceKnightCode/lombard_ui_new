@@ -10,21 +10,17 @@ class ILSwitchButton extends StatefulWidget {
   final double? width;
   final double? textSize;
 
-  final bool? isRounded;
+  final bool? isCurved;
   final bool? hasShadow;
   final bool? isOn;
-  final ValueChanged<bool>? onChanged;
+  final VoidCallback? onChanged;
   final bool? isDisabled;
-  final bool? isSwitched;
   final bool? isEmptySwitch;
 
   final Color? backgroundColor;
   final Color? activeColor;
   final Color? inactiveColor;
-  final Color? activeShadowColor;
-  final Color? inactiveShadowColor;
   final Color? textColor;
-  final Color? indicatorColor;
 
   const ILSwitchButton({
     super.key,
@@ -33,19 +29,15 @@ class ILSwitchButton extends StatefulWidget {
     this.backgroundColor,
     this.activeColor,
     this.inactiveColor,
-    this.isRounded = true,
-    this.hasShadow,
-    this.isOn,
-    this.onChanged,
-    this.isDisabled,
+    this.isCurved = true,
+    this.hasShadow = true,
+    this.isOn = false,
+    required this.onChanged,
+    this.isDisabled = false,
     this.offText = "Off",
     this.onText = "On",
-    this.activeShadowColor,
-    this.inactiveShadowColor,
     this.textColor,
     this.textSize,
-    this.indicatorColor,
-    this.isSwitched,
     this.isEmptySwitch = false,
   });
 
@@ -59,9 +51,10 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
   String? _offText;
   @override
   void initState() {
-    _isOn = widget.isSwitched ?? false;
+    _isOn = widget.isOn ?? false;
     _onText = widget.onText!;
     _offText = widget.offText!;
+
     if (widget.isEmptySwitch == true) {
       _onText = "";
       _offText = "";
@@ -72,75 +65,160 @@ class _ILSwitchButtonState extends State<ILSwitchButton> {
   @override
   Widget build(BuildContext context) {
     return PhysicalModel(
-      borderRadius: BorderRadius.circular(widget.isRounded! ? 15 : 0),
-      elevation: 2,
+      borderRadius: BorderRadius.circular(widget.isCurved! ? 15 : 0),
+      elevation: !widget.isDisabled!
+          ? widget.hasShadow!
+              ? 3
+              : 0
+          : 0,
       color: Colors.transparent,
-      shadowColor: _isOn
-          ? widget.activeShadowColor ?? Colors.grey
-          : widget.inactiveShadowColor ?? Colors.grey,
+      shadowColor: ILColors.kGreyColorc3c3c3,
       child: GestureDetector(
-        onTap: () {
-          setState(() {
-            _isOn = !_isOn;
-          });
-        },
+        onTap: !widget.isDisabled!
+            ? () {
+                setState(() {
+                  _isOn = !_isOn;
+                  widget.onChanged!();
+                });
+              }
+            : () {},
         child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: ILSizeConfig.blockSizeH * 4,
+              horizontal: ILSizeConfig.blockSizeH * 3,
               vertical: ILSizeConfig.blockSizeH * 3),
           height: widget.height ?? ILSizeConfig.blockSizeH * 12,
-          width: widget.width,
+          width: widget.width ?? ILSizeConfig.blockSizeH * 25,
           decoration: BoxDecoration(
-            color: widget.backgroundColor ?? ILColors.kWhiteColor,
-            borderRadius: BorderRadius.circular(widget.isRounded! ? 15 : 0),
+            color: !widget.isDisabled!
+                ? widget.backgroundColor ?? ILColors.kWhiteColor
+                : ILColors.kGreyPrimaryColor,
+            borderRadius: BorderRadius.circular(widget.isCurved! ? 15 : 0),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              _isOn
-                  ? Container(
-                      width: ILSizeConfig.blockSizeH * 7,
-                      margin:
-                          EdgeInsets.only(right: ILSizeConfig.blockSizeH * 5),
-                      child: Text(
-                        _onText!,
-                        style: ILTextStyles.kTitleRobotoBold.copyWith(
-                          fontSize: widget.textSize ??
-                              ILSizeConfig.textMultiplier * 4.5,
-                          color: widget.textColor ?? ILColors.kBlackColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    )
-                  : SizedBox(),
               Container(
+                margin: EdgeInsets.only(
+                  left: _isOn
+                      ? (widget.width ?? ILSizeConfig.blockSizeH * 25) -
+                          ILSizeConfig.blockSizeH * 13
+                      : 0,
+                  right: _isOn
+                      ? 0
+                      : (widget.width ?? ILSizeConfig.blockSizeH * 25) -
+                          ILSizeConfig.blockSizeH * 13,
+                ),
                 decoration: BoxDecoration(
-                    color: _isOn
-                        ? widget.activeColor ?? ILColors.kPrimaryOrangeColor
-                        : widget.inactiveColor ?? ILColors.kGreyColor,
+                    color: !widget.isDisabled!
+                        ? _isOn
+                            ? widget.activeColor ?? ILColors.kPrimaryOrangeColor
+                            : widget.inactiveColor ?? ILColors.kGreySwitchColor
+                        : ILColors.kGreySwitchColor,
                     borderRadius: BorderRadius.circular(100)),
                 height: ILSizeConfig.blockSizeH * 6,
                 width: ILSizeConfig.blockSizeH * 6,
               ),
               _isOn
-                  ? const SizedBox()
+                  ? Container(
+                      margin: EdgeInsets.only(
+                        right: _isOn
+                            ? (widget.width != null
+                                ? widget.width! - ILSizeConfig.blockSizeH * 20
+                                : ILSizeConfig.blockSizeH * 10)
+                            : 0,
+                      ),
+                      child: Text(
+                        _onText!,
+                        style: ILTextStyles.kTitleRobotoBold.copyWith(
+                          fontSize: widget.textSize ??
+                              ILSizeConfig.textMultiplier * 4.5,
+                          color: !widget.isDisabled!
+                              ? widget.textColor ?? ILColors.kBlackColor
+                              : ILColors.kGreySwitchColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    )
                   : Container(
-                      width: ILSizeConfig.blockSizeH * 7,
-                      margin:
-                          EdgeInsets.only(left: ILSizeConfig.blockSizeH * 5),
+                      margin: EdgeInsets.only(
+                          left: _isOn
+                              ? 0
+                              : (widget.width != null
+                                  ? widget.width! - ILSizeConfig.blockSizeH * 20
+                                  : ILSizeConfig.blockSizeH * 10)),
                       child: Text(
                         _offText!,
                         style: ILTextStyles.kTitleRobotoBold.copyWith(
                           fontSize: widget.textSize ??
                               ILSizeConfig.textMultiplier * 4.5,
-                          color: widget.textColor ?? ILColors.kBlackColor,
+                          color: !widget.isDisabled!
+                              ? widget.textColor ?? ILColors.kBlackColor
+                              : ILColors.kGreySwitchColor,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
             ],
           ),
+
+          // child: Row(
+          //   mainAxisSize: MainAxisSize.min,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     _isOn
+          //         ? Container(
+          //             color: Colors.red,
+          //             width: (widget.width ?? ILSizeConfig.blockSizeH * 33) -
+          //                 ILSizeConfig.blockSizeH * 18,
+          //             margin:
+          //                 EdgeInsets.only(right: ILSizeConfig.blockSizeH * 5),
+          //             child: Text(
+          //               _onText!,
+          //               style: ILTextStyles.kTitleRobotoBold.copyWith(
+          //                 fontSize: widget.textSize ??
+          //                     ILSizeConfig.textMultiplier * 4.5,
+          //                 color: !widget.isDisabled!
+          //                     ? widget.textColor ?? ILColors.kBlackColor
+          //                     : ILColors.kGreySwitchColor,
+          //                 fontWeight: FontWeight.w600,
+          //               ),
+          //             ),
+          //           )
+          //         : const SizedBox(),
+          //     Container(
+          //       decoration: BoxDecoration(
+          //           color: !widget.isDisabled!
+          //               ? _isOn
+          //                   ? widget.activeColor ?? ILColors.kPrimaryOrangeColor
+          //                   : widget.inactiveColor ?? ILColors.kGreySwitchColor
+          //               : ILColors.kGreySwitchColor,
+          //           borderRadius: BorderRadius.circular(100)),
+          //       height: ILSizeConfig.blockSizeH * 6,
+          //       width: ILSizeConfig.blockSizeH * 6,
+          //     ),
+          //     _isOn
+          //         ? const SizedBox()
+          //         : Container(
+          //             color: Colors.red,
+          //             width: (widget.width ?? ILSizeConfig.blockSizeH * 33) -
+          //                 ILSizeConfig.blockSizeH * 23,
+          //             margin:
+          //                 EdgeInsets.only(left: ILSizeConfig.blockSizeH * 5),
+          //             child: Text(
+          //               _offText!,
+          //               style: ILTextStyles.kTitleRobotoBold.copyWith(
+          //                 fontSize: widget.textSize ??
+          //                     ILSizeConfig.textMultiplier * 4.5,
+          //                 color: !widget.isDisabled!
+          //                     ? widget.textColor ?? ILColors.kBlackColor
+          //                     : ILColors.kGreySwitchColor,
+          //                 fontWeight: FontWeight.w600,
+          //               ),
+          //             ),
+          //           ),
+          //   ],
+          // ),
         ),
       ),
     );
