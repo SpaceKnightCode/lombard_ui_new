@@ -3,26 +3,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 
 class ILCheckBox extends StatefulWidget {
-  const ILCheckBox({
+  ILCheckBox({
     Key? key,
     required this.text,
     this.activeColor,
     this.checkColor,
     required this.onChanged,
+    this.isDisabled,
   }) : super(key: key);
 
   final String text;
   final Color? activeColor;
   final Color? checkColor;
-  final VoidCallback onChanged;
+  final void Function(bool) onChanged;
+  final bool? isDisabled;
+  bool isSelected = false;
+  bool getSelection() {
+    return isSelected;
+  }
 
   @override
   State<ILCheckBox> createState() => _ILCheckBoxState();
 }
 
 class _ILCheckBoxState extends State<ILCheckBox> {
-  bool _isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,11 +37,12 @@ class _ILCheckBoxState extends State<ILCheckBox> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
-          value: _isChecked,
+          value: widget.isSelected,
           onChanged: (value) {
-            widget.onChanged();
+            widget.onChanged(value!);
+
             setState(() {
-              _isChecked = value!;
+              widget.isSelected = value!;
             });
           },
         ),

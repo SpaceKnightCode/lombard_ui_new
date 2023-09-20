@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 import 'package:lombard_ui_new/il_dropdown.dart';
+import 'package:lombard_ui_new/il_heading_text_box.dart';
 import 'package:lombard_ui_new/il_switch_button.dart';
 import 'package:lombard_ui_new/il_text_image.dart';
 import 'package:lombard_ui_new/il_textfield.dart';
@@ -27,6 +30,8 @@ class LombardUITestPage extends StatefulWidget {
 
 class _LombardUITestPageState extends State<LombardUITestPage> {
   TextEditingController controller = TextEditingController();
+  String? year = "1";
+
   @override
   Widget build(BuildContext context) {
     ILSizeConfig().init(context);
@@ -36,212 +41,248 @@ class _LombardUITestPageState extends State<LombardUITestPage> {
       home: Scaffold(
         body: Container(
           margin: const EdgeInsets.only(top: 100, left: 20, right: 20),
-
-          child: ILDropdown(
-            items: [
-              "option  1",
-              "jANechb",
-              "option q34r",
-              "ESFEaawef",
-              "option 123",
-              "option asd",
-              "EFceWesfwDEF",
-              "53Y45SSZG"
-            ],
-            label: "Customer type",
-            onChanged: (String value) {
-              print(value);
-            },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const ILHeadingTextBox(
+                  title: "Hyundai Santro GL",
+                  urlText: "View Details",
+                  url: "https://www.google.com",
+                  subtitle: "M23847AG",
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ILDropdown(
+                  items: const [
+                    "option  1",
+                    "jANechb",
+                    "option q34r",
+                    "ESFEaawef",
+                    "option 123",
+                    "option asd",
+                    "EFceWesfwDEF",
+                    "53Y45SSZG"
+                  ],
+                  label: "Customer type",
+                  onChanged: (String value) {
+                    print(value);
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ILTextField(
+                  controller: controller,
+                  hintText: "Enter Username here",
+                  labelText: "Name",
+                  isMandatory: true,
+                  isPassword: false,
+                  onChanged: (value) {
+                    print(value);
+                  },
+                  isCurved: true,
+                  isEnabled: true,
+                  maxLength: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ILExpansionTile(
+                  title: "Expanded Tile",
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                            width: 20,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            child: Row(
+                              children: [
+                                ILSwitchButton(
+                                  isEmptySwitch: false,
+                                  onChanged: () {
+                                    print("switch buttom clicked");
+                                  },
+                                  // activeColor: ILColors.kDarkRedColor,
+                                  // inactiveColor: ILColors.kGreenColor,
+                                  // hasShadow: true,
+                                  // isDisabled: false,
+                                  // isCurved: false,
+                                  // textColor: Colors.blue,
+                                  // offText: "off",
+                                  // onText: "Yes",
+                                  // isOn: true,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                ILTextButton(
+                                  text: "Add policy",
+                                  icon: Icons.add,
+                                  iconPosition: IconPosition.left,
+                                  onPressed: () {
+                                    print("added policy");
+                                  },
+                                  backgroundColor: Colors.orange,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const ILOptionsTextbox(
+                        leading: Icon(
+                          Icons.access_alarms_rounded,
+                        ),
+                        text: "what is the time",
+                        hasInfo: true,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ILDetailsCard(
+                  title: "Add on cover",
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ILOptionsTextbox(
+                            hasInfo: true,
+                            text: "Car Insurance",
+                            leading: Image.network(
+                              "https://w7.pngwing.com/pngs/639/449/png-transparent-computer-icons-website-icon-text-globe-symmetry-thumbnail.png",
+                            ),
+                            infoUrl: "https://www.google.com",
+                          ),
+                          const Spacer(),
+                          ILCheckBox(
+                            text: "",
+                            onChanged: (value) {
+                              if (value) {
+                                print("car insurance selected");
+                              } else {
+                                print("car insurance unselected");
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ILOptionsTextbox(
+                            hasInfo: true,
+                            text: "health Insurance",
+                            leading: Image.network(
+                              "https://w7.pngwing.com/pngs/639/449/png-transparent-computer-icons-website-icon-text-globe-symmetry-thumbnail.png",
+                            ),
+                            infoUrl: "https://www.google.com",
+                          ),
+                          const Spacer(),
+                          ILCheckBox(
+                              text: "",
+                              onChanged: (value) {
+                                if (value) {
+                                  print("health insurance selected");
+                                } else {
+                                  print("health insurance unselected");
+                                }
+                              }),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ILRadioButton(
+                        title: "3 year",
+                        subtitle: "\$3001",
+                        value: "3",
+                        isRecommended: false,
+                        groupValue: year,
+                        onChanged: (value) {
+                          setState(() {
+                            year = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      ILRadioButton(
+                        title: "2 year",
+                        value: "2",
+                        subtitle: "\$2001",
+                        groupValue: year,
+                        isRecommended: true,
+                        onChanged: (value) {
+                          setState(() {
+                            year = value;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      ILRadioButton(
+                        title: "1 year",
+                        value: "1",
+                        subtitle: "\$1001s",
+                        groupValue: year,
+                        onChanged: (value) {
+                          setState(() {
+                            year = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ILTextImage(
+                  image: Image.network(
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPR9o1fOPg6j7cQ0uX4AsxAhKFv_zJ3wkkA&usqp=CAU"),
+                  text: "hello world",
+                  padding: 10,
+                  isCurved: true,
+                  spacing: 10,
+                  // textAlign: TextAlign.start,
+                  // textColor: Colors.red,
+                  textSize: 20,
+                  height: 200,
+                  width: 400,
+                  // borderColor: Colors.black,
+                  fit: BoxFit.fitWidth,
+                  // backgroundColor: Colors.grey,
+                ),
+              ],
+            ),
           ),
-
-          // child: ILSwitchButton(
-          //   isEmptySwitch: false,
-          //   onChanged: () {},
-          //   activeColor: ILColors.kDarkRedColor,
-          //   inactiveColor: ILColors.kGreenColor,
-          //   hasShadow: true,
-          //   isDisabled: false,
-          //   isCurved: false,
-          //   textColor: Colors.blue,
-          //   offText: "off",
-          //   textSize: 30,
-          //   onText: "elsse",
-          //   isOn: true,
-          // ),
-
-          // child: ILTextImage(
-          //   image: Image.network(
-          //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPR9o1fOPg6j7cQ0uX4AsxAhKFv_zJ3wkkA&usqp=CAU"),
-          //   text: "hello world",
-          //   padding: 10,
-          //   isCurved: true,
-          //   spacing: 10,
-          //   textAlign: TextAlign.start,
-          //   textColor: Colors.red,
-          //   textSize: 20,
-          //   height: 200,
-          //   width: 400,
-          //   borderColor: Colors.black,
-          //   fit: BoxFit.fitWidth,
-          //   backgroundColor: Colors.grey,
-          // ),
-
-          // child: ILTextField(
-          //   controller: controller,
-          //   hintText: "Enter Username here",
-          //   labelText: "Name",
-          //   isMandatory: true,
-          //   isPassword: false,
-          //   onChanged: (value) {
-          //     print(value);
-          //   },
-          //   isCurved: false,
-          //   isEnabled: true,
-          //   maxLength: 20,
-          // ),
-          // child: ILSplitCard(
-          //   width: ILSizeConfig.blockSizeH * 100,
-          //   header: Container(
-          //     color: Colors.red,
-          //     width: 300,
-          //     height: 50,
-          //   ),
-          //   body: Container(
-          //     decoration: BoxDecoration(
-          //       color: Colors.yellow,
-          //       borderRadius: BorderRadius.circular(10),
-          //     ),
-          //     width: 100,
-          //     height: 100,
-          //   ),
-          //   footer: Container(
-          //     color: Colors.blue,
-          //     width: 300,
-          //     height: 50,
-          //   ),
-          // ),
-
-          // child: ILDetailsCard(
-          //   title: "Add on cover",
-          //   child: Column(
-          //     children: [
-          //       Row(
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: [
-          //           ILOptionsTextbox(
-          //             hasInfo: true,
-          //             text: "Car Insurance",
-          //             leading: Image.network(
-          //               "https://w7.pngwing.com/pngs/639/449/png-transparent-computer-icons-website-icon-text-globe-symmetry-thumbnail.png",
-          //             ),
-          //             infoUrl: "https://www.google.com",
-          //           ),
-          //           const Spacer(),
-          //           ILCheckBox(
-          //             text: "",
-          //             onChanged: () {},
-          //           ),
-          //         ],
-          //       ),
-          //       Row(
-          //         mainAxisSize: MainAxisSize.max,
-          //         children: [
-          //           ILOptionsTextbox(
-          //             hasInfo: true,
-          //             text: "Car Insurance",
-          //             leading: Image.network(
-          //               "https://w7.pngwing.com/pngs/639/449/png-transparent-computer-icons-website-icon-text-globe-symmetry-thumbnail.png",
-          //             ),
-          //             infoUrl: "https://www.google.com",
-          //           ),
-          //           const Spacer(),
-          //           ILCheckBox(
-          //             text: "",
-          //             onChanged: () {},
-          //           ),
-          //         ],
-          //       ),
-          //     ],
-          //   ),
-          // ),
-
-          // ILOptionsTextbox(
-          //   icon: Icons.access_alarms_rounded,
-          //   text: "text",
-          //   hasInfo: true,
-          // ),
-
-          // ILRadioButton(
-          //   title: "1 year",
-          //   isDisabled: true,
-          //   value: "1",
-          //   subtitle: "\$1001",
-          //   isRecommended: false,
-          //   groupValue: year,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       year = value;
-          //     });
-          //   },
-          // ),
-          // SizedBox(
-          //   width: 10,
-          // ),
-          // ILRadioButton(
-          //   title: "3 year",
-          //   subtitle: "\$3001",
-          //   value: "3",
-          //   isRecommended: false,
-          //   groupValue: year,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       year = value;
-          //     });
-          //   },
-          // ),
-          // SizedBox(
-          //   width: 10,
-          // ),
-          // ILRadioButton(
-          //   title: "2 year",
-          //   value: "2",
-          //   subtitle: "\$2001",
-          //   groupValue: year,
-          //   isRecommended: true,
-          //   onChanged: (value) {
-          //     setState(() {
-          //       year = value;
-          //     });
-          //   },
-          // ),
-
-          // ILCheckBox(
-          //   text: "hello",
-          // ),
-
-          // ILExpansionTile(
-          //   title: "Ownswe",
-          //   child: Row(
-          //     children: [
-          //       Container(
-          //         color: Colors.red,
-          //         child: const Text('text'),
-          //       )
-          //     ],
-          //   ),
-          // ),
-
-          //ILButton
-
-          // child: ILTextButton(
-          //   text: "kuuvfuvuvulvulv",
-          //   icon: Icons.add,
-          //   iconPosition: IconPosition.left,
-          //   onPressed: () {
-          //     print("object");
-          //   },
-          //   backgroundColor: Colors.orange,
-          // ),
         ),
       ),
     );
