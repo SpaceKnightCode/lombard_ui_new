@@ -7,7 +7,7 @@ enum IconPosition { left, right }
 class ILTextButton extends StatelessWidget {
   final String text;
   final bool? isFullWidth;
-  final MaterialColor? backgroundColor;
+  final Color? backgroundColor;
   final Color? textColor;
   final bool? isCurved;
   final VoidCallback onPressed;
@@ -18,11 +18,13 @@ class ILTextButton extends StatelessWidget {
   final IconData? icon;
   final IconPosition? iconPosition;
   final double? textSize;
+  final FontWeight? fontWeight;
+  final EdgeInsets? contentPadding;
 
   const ILTextButton({
     super.key,
     required this.text,
-    this.backgroundColor,
+    this.backgroundColor = ILColors.kPrimaryOrangeColor,
     required this.onPressed,
     this.textColor = Colors.white,
     this.isCurved = false,
@@ -34,6 +36,8 @@ class ILTextButton extends StatelessWidget {
     this.iconPosition = IconPosition.left,
     this.isFullWidth = false,
     this.textSize,
+    this.fontWeight,
+    this.contentPadding,
   });
   @override
   Widget build(BuildContext context) {
@@ -42,13 +46,17 @@ class ILTextButton extends StatelessWidget {
       child: Container(
         width: isFullWidth! ? double.infinity : width,
         height: height,
-        padding: EdgeInsets.symmetric(
-            horizontal: ILSizeConfig.blockSizeH * 5,
-            vertical: ILSizeConfig.blockSizeV * 2),
+        padding: contentPadding ??
+            EdgeInsets.symmetric(
+              horizontal: ILSizeConfig.blockSizeH * 4,
+              vertical: ILSizeConfig.blockSizeV * 1.5,
+            ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(isCurved! ? 30 : 10),
           color: backgroundColor ?? Theme.of(context).primaryColor,
-          border: hasBorder! ? Border.all(color: Colors.grey) : null,
+          border: borderColor != null || hasBorder!
+              ? Border.all(color: borderColor ?? Colors.orange, width: 1.5)
+              : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -68,7 +76,10 @@ class ILTextButton extends StatelessWidget {
               ),
             Text(
               text,
-              style: TextStyle(color: textColor, fontSize: textSize),
+              style: TextStyle(
+                  color: textColor,
+                  fontSize: textSize ?? ILSizeConfig.textMultiplier * 3.5,
+                  fontWeight: fontWeight ?? FontWeight.w600),
             ),
             if (icon != null && iconPosition == IconPosition.right)
               Row(
