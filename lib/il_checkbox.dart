@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lombard_ui/common/il_constants.dart';
 
+// ignore: must_be_immutable
 class ILCheckBox extends StatefulWidget {
   ILCheckBox({
     Key? key,
@@ -42,7 +43,7 @@ class _ILCheckBoxState extends State<ILCheckBox> {
             widget.onChanged(value!);
 
             setState(() {
-              widget.isSelected = value!;
+              widget.isSelected = value;
             });
           },
         ),
